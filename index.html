@@ -1,1 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        nav {
+            background: #fff;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #0066cc;
+        }
+
+        section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .work-item {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .work-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .work-item h3 {
+            margin-bottom: 1rem;
+            color: #667eea;
+            font-size: 1.3rem;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .video-item {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+        }
+
+        .video-item h3 {
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .video-placeholder {
+            width: 100%;
+            height: 200px;
+            background: #ddd;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .blog-posts {
+            display: grid;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .blog-post {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .blog-post:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .blog-post h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .blog-date {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .resume-section {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .resume-category {
+            margin-bottom: 2rem;
+        }
+
+        .resume-category h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 0.5rem;
+        }
+
+        .resume-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .resume-item h4 {
+            margin-bottom: 0.3rem;
+        }
+
+        .resume-item .date {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .download-btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: background 0.3s;
+        }
+
+        .download-btn:hover {
+            background: #5568d3;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        button {
+            background: #667eea;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #5568d3;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .social-links a:hover {
+            opacity: 0.7;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#psychology">Psychology</a></li>
+            <li><a href="#music">Music</a></li>
+            <li><a href="#volleyball">Volleyball</a></li>
+            <li><a href="#blog">Blog</a></li>
+            <li><a href="#resume">Resume</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero" id="home">
+        <h1>Hi, I'm [Your Name]</h1>
+        <p>High School Student | Music Composer | Volleyball Player | Future Psychologist</p>
+        <a href="#contact" class="cta-button">Get In Touch</a>
+    </section>
+
+    <section id="about">
+        <h2>About Me</h2>
+        <div class="about-content">
+            <p>Hi! I'm a high school student with a deep passion for understanding the human mind and expressing emotions through music. I'm fascinated by psychology and plan to pursue it in college, while continuing to develop my skills as a classical music composer.</p>
+            <p style="margin-top: 1rem;">When I'm not studying or composing, you'll find me on the volleyball court playing for my club travel team. I love the teamwork, discipline, and competitive spirit that volleyball brings to my life. Balancing academics, music, and athletics has taught me time management, dedication, and the importance of pursuing what you're passionate about.</p>
+            <p style="margin-top: 1rem;">Explore the sections below to learn more about my psychology writings, musical compositions, volleyball journey, and more!</p>
+        </div>
+    </section>
+
+    <section id="work">
+        <h2>Quick Overview</h2>
+        <div class="work-grid">
+            <div class="work-item">
+                <h3>🎵 Music Composition</h3>
+                <p>I compose classical music pieces, drawing inspiration from composers like Chopin, Debussy, and Rachmaninoff. My compositions explore themes of emotion, nature, and the human experience.</p>
+                <a href="#music" style="color: #667eea; text-decoration: none;">→ View my compositions</a>
+            </div>
+            <div class="work-item">
+                <h3>🧠 Psychology Research</h3>
+                <p>I'm deeply interested in cognitive psychology and mental health. I read research papers, follow current studies, and write about psychology topics that fascinate me.</p>
+                <a href="#psychology" style="color: #667eea; text-decoration: none;">→ Read my writings</a>
+            </div>
+            <div class="work-item">
+                <h3>🏐 Club Volleyball</h3>
+                <p>As a member of my club travel volleyball team, I compete in tournaments across the region. Volleyball has taught me teamwork, resilience, and the value of consistent practice.</p>
+                <a href="#volleyball" style="color: #667eea; text-decoration: none;">→ See my journey</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="psychology">
+        <h2>Psychology Reading & Writing</h2>
+        <div class="about-content">
+            <p style="margin-bottom: 2rem;">I'm passionate about exploring the human mind and behavior. Here are some of my recent readings and writings on psychology topics.</p>
+        </div>
+        <div class="blog-posts">
+            <div class="blog-post">
+                <h3>Understanding Cognitive Biases in Daily Life</h3>
+                <div class="blog-date">December 2025</div>
+                <p>An exploration of how confirmation bias and availability heuristic affect our decision-making processes. I examine real-world examples and discuss strategies to overcome these mental shortcuts.</p>
+            </div>
+            <div class="blog-post">
+                <h3>The Psychology of Music and Emotion</h3>
+                <div class="blog-date">November 2025</div>
+                <p>A deep dive into how music affects our emotional states, exploring research on music therapy and the neurological responses to different musical elements.</p>
+            </div>
+            <div class="blog-post">
+                <h3>Book Review: "Thinking, Fast and Slow" by Daniel Kahneman</h3>
+                <div class="blog-date">October 2025</div>
+                <p>My thoughts on Kahneman's groundbreaking work on behavioral economics and the two systems of thinking. Key takeaways and how they apply to student life.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="music">
+        <h2>My Compositions</h2>
+        <div class="about-content">
+            <p style="margin-bottom: 2rem;">Here are some of my classical music compositions. Click on the titles to listen on YouTube.</p>
+        </div>
+        <div class="video-grid">
+            <div class="video-item">
+                <div class="video-placeholder">YouTube Video</div>
+                <h3>Nocturne in E Minor</h3>
+                <p>A melancholic nocturne inspired by Chopin, exploring themes of solitude and reflection. Composed in Fall 2025.</p>
+                <a href="YOUR_YOUTUBE_LINK" target="_blank" style="color: #667eea; text-decoration: none;">▶ Watch on YouTube</a>
+            </div>
+            <div class="video-item">
+                <div class="video-placeholder">YouTube Video</div>
+                <h3>Prelude: Dawn's Awakening</h3>
+                <p>An impressionistic piece capturing the gradual awakening of nature at sunrise. Influenced by Debussy's style.</p>
+                <a href="YOUR_YOUTUBE_LINK" target="_blank" style="color: #667eea; text-decoration: none;">▶ Watch on YouTube</a>
+            </div>
+            <div class="video-item">
+                <div class="video-placeholder">YouTube Video</div>
+                <h3>Sonata Movement No. 1</h3>
+                <p>The first movement of a work-in-progress sonata, featuring dynamic contrasts and emotional depth.</p>
+                <a href="YOUR_YOUTUBE_LINK" target="_blank" style="color: #667eea; text-decoration: none;">▶ Watch on YouTube</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="volleyball">
+        <h2>Volleyball Journey</h2>
+        <div class="about-content">
+            <p style="margin-bottom: 2rem;">Follow my volleyball experiences, tournament highlights, and reflections on being a club travel volleyball player.</p>
+        </div>
+        <div class="blog-posts">
+            <div class="blog-post">
+                <h3>Regional Championship Reflections</h3>
+                <div class="blog-date">January 2026</div>
+                <p>Our team's journey through the regional championships. What we learned, how we grew, and the bonds we formed along the way.</p>
+                <a href="YOUR_VIDEO_LINK" target="_blank" style="color: #667eea; text-decoration: none;">🎥 Watch Game Highlights</a>
+            </div>
+            <div class="blog-post">
+                <h3>The Mental Game: Staying Focused Under Pressure</h3>
+                <div class="blog-date">December 2025</div>
+                <p>How I use psychology principles to stay mentally strong during intense matches. Techniques for managing stress and maintaining confidence.</p>
+                <a href="YOUR_VIDEO_LINK" target="_blank" style="color: #667eea; text-decoration: none;">🎥 Watch Training Session</a>
+            </div>
+            <div class="blog-post">
+                <h3>Tournament Recap: Winter Invitational</h3>
+                <div class="blog-date">November 2025</div>
+                <p>A detailed recap of our performance at the Winter Invitational. Key plays, team dynamics, and lessons learned.</p>
+                <a href="YOUR_VIDEO_LINK" target="_blank" style="color: #667eea; text-decoration: none;">🎥 Watch Full Match</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="blog">
+        <h2>Blog</h2>
+        <div class="about-content">
+            <p style="margin-bottom: 2rem;">My thoughts on life, learning, and the intersection of psychology, music, and sports.</p>
+        </div>
+        <div class="blog-posts">
+            <div class="blog-post">
+                <h3>Balancing Passion and Academics</h3>
+                <div class="blog-date">January 2026</div>
+                <p>How I manage my time between composing music, playing volleyball, and maintaining strong grades. Tips and strategies that have worked for me.</p>
+            </div>
+            <div class="blog-post">
+                <h3>Why I Want to Study Psychology</h3>
+                <div class="blog-date">December 2025</div>
+                <p>The personal experiences and curiosities that have drawn me to psychology. My goals for college and beyond.</p>
+            </div>
+            <div class="blog-post">
+                <h3>The Discipline of Daily Practice</h3>
+                <div class="blog-date">November 2025</div>
+                <p>What volleyball and music composition have taught me about consistency, patience, and the power of showing up every day.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="resume">
+        <h2>Resume</h2>
+        <div class="resume-section">
+            <div class="resume-category">
+                <h3>Education</h3>
+                <div class="resume-item">
+                    <h4>[Your High School Name]</h4>
+                    <div class="date">Expected Graduation: 2027</div>
+                    <p>GPA: [Your GPA] | Relevant Coursework: AP Psychology, Music Theory, [Other Courses]</p>
+                </div>
+            </div>
+
+            <div class="resume-category">
+                <h3>Music Experience</h3>
+                <div class="resume-item">
+                    <h4>Classical Music Composer</h4>
+                    <div class="date">2022 - Present</div>
+                    <p>Composed over [X] original classical pieces including nocturnes, preludes, and sonatas. Performances at school concerts and local events.</p>
+                </div>
+                <div class="resume-item">
+                    <h4>[Your Instrument] Player</h4>
+                    <div class="date">20XX - Present</div>
+                    <p>Member of school orchestra/band. [Any awards or achievements]</p>
+                </div>
+            </div>
+
+            <div class="resume-category">
+                <h3>Athletics</h3>
+                <div class="resume-item">
+                    <h4>Club Travel Volleyball Player</h4>
+                    <div class="date">20XX - Present</div>
+                    <p>[Your Club Name] | Position: [Your Position] | Competed in regional and state tournaments</p>
+                </div>
+            </div>
+
+            <div class="resume-category">
+                <h3>Psychology & Research Interests</h3>
+                <div class="resume-item">
+                    <p>Independent study of cognitive psychology, behavioral economics, and music psychology. Active reader of psychology research and literature.</p>
+                </div>
+            </div>
+
+            <div class="resume-category">
+                <h3>Skills</h3>
+                <div class="resume-item">
+                    <p><strong>Music:</strong> Composition, Music Theory, [Your Instruments], Notation Software (Finale/Sibelius/MuseScore)</p>
+                    <p><strong>Other:</strong> Research & Writing, Time Management, Team Collaboration, Public Speaking</p>
+                </div>
+            </div>
+
+            <a href="#" class="download-btn">📄 Download Full Resume (PDF)</a>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Let's Connect</h2>
+        <form class="contact-form" onsubmit="handleSubmit(event)">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" required></textarea>
+            </div>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 [Your Name]. All rights reserved.</p>
+        <div class="social-links">
+            <a href="#">Instagram</a>
+            <a href="#">YouTube</a>
+            <a href="#">Email</a>
+        </div>
+    </footer>
+
+    <script>
+        function handleSubmit(e) {
+            e.preventDefault();
+            alert('Thank you for your message! In a real website, this would send an email or save to a database.');
+            e.target.reset();
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
