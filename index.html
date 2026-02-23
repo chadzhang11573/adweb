@@ -661,39 +661,48 @@
         return COLORS[Math.floor(Math.random() * COLORS.length)];
     }
 
-    function startFlicker() {
+function startFlicker() {
     const letters = TEXT.split("").map((ch, i) => ({ ch, i }))
                         .filter(x => x.ch !== " ");
 
-    setInterval(() => {
-        // pick 1-3 random letters
-        const count = Math.floor(Math.random() * 3) + 1;
-        const shuffled = [...letters].sort(() => Math.random() - 0.5);
-        const picks = shuffled.slice(0, count);
+    function scheduleNext() {
+        // random interval between 5000–8000ms
+        const wait = 5000 + Math.floor(Math.random() * 3000);
 
-        // determine 1-2 flickers for this burst
-        const flickers = Math.floor(Math.random() * 2) + 1;
+        setTimeout(() => {
+            const count    = Math.floor(Math.random() * 3) + 1;
+            const shuffled = [...letters].sort(() => Math.random() - 0.5);
+            const picks    = shuffled.slice(0, count);
+            const flickers = Math.floor(Math.random() * 2) + 1;
 
-        picks.forEach(pick => {
-            const original = { char: TEXT[pick.i], color: "#ffffff", done: true };
+            picks.forEach(pick => {
+                const original = { char: TEXT[pick.i], color: "#ffffff", done: true };
 
-            for (let f = 0; f < flickers; f++) {
-                const glitchDelay   = f * 200;        // each flicker 200ms apart
-                const restoreDelay  = glitchDelay + 150; // restore 150ms after glitch
+                for (let f = 0; f < flickers; f++) {
+                    // 150–200ms gap between flickers
+                    const gap          = 150 + Math.floor(Math.random() * 51);
+                    const glitchDelay  = f * gap;
+                    // 50–150ms time spent swapped before restoring
+                    const swapDuration = 50 + Math.floor(Math.random() * 101);
+                    const restoreDelay = glitchDelay + swapDuration;
 
-                setTimeout(() => {
-                    displayChars[pick.i] = { char: randomSymbol(), color: randomColor(), done: true };
-                    drawText(displayChars);
-                }, glitchDelay);
+                    setTimeout(() => {
+                        displayChars[pick.i] = { char: randomSymbol(), color: randomColor(), done: true };
+                        drawText(displayChars);
+                    }, glitchDelay);
 
-                setTimeout(() => {
-                    displayChars[pick.i] = original;
-                    drawText(displayChars);
-                }, restoreDelay);
-            }
-        });
+                    setTimeout(() => {
+                        displayChars[pick.i] = original;
+                        drawText(displayChars);
+                    }, restoreDelay);
+                }
+            });
 
-    }, 5500);
+            scheduleNext(); // queue the next burst after this one fires
+        }, wait);
+    }
+
+    scheduleNext();
 }
 
     function init() {
