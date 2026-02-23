@@ -625,11 +625,12 @@
     const TEXT    = "adrian zhang";
     const COLORS  = ["#ff00ff", "#ffe600", "#00f5ff"];
     const SYMBOLS = "!@#$%^&*<>?/\\|[]{}~`±§≠∆ø∑∏åß∂ƒ©√∫≈";
-    const INTERVAL_PER_LETTER = 800; // 0.8 seconds per letter
+    const INTERVAL_PER_LETTER = 800;
 
-    const canvas   = document.getElementById("name-canvas");
-    const ctx      = canvas.getContext("2d");
-    let fontSize, animId;
+    const canvas = document.getElementById("name-canvas");
+    const ctx    = canvas.getContext("2d");
+    let fontSize;
+    let displayChars = [];  // declared here so startFlicker() can see it
 
     function setup() {
         canvas.width  = canvas.offsetWidth;
@@ -637,18 +638,15 @@
         fontSize = Math.min(canvas.width * 0.11, 100);
     }
 
-    function drawText(displayChars) {
+    function drawText(chars) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.font          = `600 ${fontSize}px monospace`;
-        ctx.textAlign     = "center";
-        ctx.textBaseline  = "middle";
-
-        // measure total width so we can center letter by letter
+        ctx.font         = `600 ${fontSize}px monospace`;
+        ctx.textAlign    = "center";
+        ctx.textBaseline = "middle";
         const totalWidth = ctx.measureText(TEXT).width;
         let x = canvas.width / 2 - totalWidth / 2;
         const y = canvas.height / 2;
-
-        for (const ch of displayChars) {
+        for (const ch of chars) {
             ctx.fillStyle = ch.color;
             ctx.fillText(ch.char, x + ctx.measureText(ch.char).width / 2, y);
             x += ctx.measureText(ch.char).width;
@@ -663,75 +661,64 @@
         return COLORS[Math.floor(Math.random() * COLORS.length)];
     }
 
+    function startFlicker() {
+        const letters = TEXT.split("").map((ch, i) => ({ ch, i }))
+                            .filter(x => x.ch !== " ");
+        setInterval(() => {
+            const pick     = letters[Math.floor(Math.random() * letters.length)];
+            const original = { char: TEXT[pick.i], color: "#ffffff", done: true };
+
+            // glitch one letter
+            displayChars[pick.i] = {
+                char:  randomSymbol(),
+                color: randomColor(),
+                done:  true
+            };
+            drawText(displayChars);
+
+            // restore after 2 seconds
+            setTimeout(() => {
+                displayChars[pick.i] = original;
+                drawText(displayChars);
+            }, 2000);
+
+        }, 12000);
+    }
+
     function init() {
         setup();
-        if (animId) clearInterval(animId);
 
-        // start with all scrambled characters
-        let settled = 0;
-        let displayChars = TEXT.split("").map(ch => ({
+        // initialise all characters as scrambled
+        displayChars = TEXT.split("").map(ch => ({
             char:  ch === " " ? " " : randomSymbol(),
             color: randomColor(),
-            done:  ch === " "   // spaces settle immediately
+            done:  ch === " "
         }));
 
-        // rapidly cycle the unsettled letters
+        // rapidly cycle unsettled letters
         const scrambleId = setInterval(() => {
             displayChars = displayChars.map(ch => {
                 if (ch.done) return ch;
                 return { ...ch, char: randomSymbol(), color: randomColor() };
             });
             drawText(displayChars);
-        }, 60); // scramble speed in ms — lower = faster cycling
+        }, 60);
 
-        // settle one letter at a time every INTERVAL_PER_LETTER ms
+        // settle one letter at a time
         const settleId = setInterval(() => {
-            // find next unsettled non-space character
             const idx = displayChars.findIndex(ch => !ch.done);
             if (idx === -1) {
                 clearInterval(settleId);
                 clearInterval(scrambleId);
+                startFlicker();  // kick off flicker once fully settled
                 return;
             }
-            displayChars[idx] = {
-                char:  TEXT[idx],
-                color: "#ffffff",
-                done:  true
-            };
-            settled++;
+            displayChars[idx] = { char: TEXT[idx], color: "#ffffff", done: true };
         }, INTERVAL_PER_LETTER);
     }
 
     window.addEventListener("resize", init);
     init();
-    // ── post-settle flicker effect ──
-function startFlicker() {
-    const letters = TEXT.split("").map((ch, i) => ({ ch, i }))
-                        .filter(x => x.ch !== " "); // ignore spaces
-
-    setInterval(() => {
-        // pick a random settled letter
-        const pick = letters[Math.floor(Math.random() * letters.length)];
-
-        // snapshot what it currently looks like so we can restore it
-        const original = { char: TEXT[pick.i], color: "#ffffff", done: true };
-
-        // swap to a random symbol + color
-        displayChars[pick.i] = {
-            char:  SYMBOLS[Math.floor(Math.random() * SYMBOLS.length)],
-            color: COLORS[Math.floor(Math.random() * COLORS.length)],
-            done:  true
-        };
-        drawText(displayChars);
-
-        // restore after 2 seconds
-        setTimeout(() => {
-            displayChars[pick.i] = original;
-            drawText(displayChars);
-        }, 2000);
-
-    }, 12000); // every 12 seconds (10s wait + 2s glitch = 12s full cycle)
-}
 </script>
 
 </body>
