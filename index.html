@@ -611,7 +611,7 @@
 
         const TEXT         = "adrian zhang";   // ← your name
         const COLORS       = ["#ffffff","#e0d7ff","#c4b5fd","#a78bfa","#ddd6fe"];
-        const PARTICLE_GAP = 4;
+        const PARTICLE_GAP = 2;
 
         function setup() {
             canvas.width  = canvas.offsetWidth;
@@ -624,7 +624,7 @@
             off.width  = W; off.height = H;
             const octx = off.getContext("2d");
             const fontSize = Math.min(W * 0.11, 100);
-            octx.font         = `600 ${fontSize}px 'Cormorant Garamond', serif`;
+            octx.font         = `600 ${fontSize}px -apple-system, 'SF Pro Display', BlinkMacSystemFont, sans-serif`;
             octx.textAlign    = "center";
             octx.textBaseline = "middle";
             octx.fillStyle    = "white";
