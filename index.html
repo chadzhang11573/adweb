@@ -58,7 +58,7 @@
         .hero {
             text-align: center;
             padding: 6rem 2rem 4rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #000000;
             color: white;
             position: relative;   /* ← needed for canvas */
             overflow: hidden;     /* ← needed for canvas */
@@ -696,7 +696,7 @@
             const dt = lastTime ? Math.min((ts - lastTime) / 1000, 0.05) : 0.016;
             lastTime = ts;
             // trail effect — matches hero gradient color
-            ctx.fillStyle = "rgba(102, 126, 234, 0.2)";
+            ctx.fillStyle = "rgba(0, 0, 0, 0.2)";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             ctx.globalAlpha = 1;
             for (const p of particles) { p.update(dt); p.draw(); }
