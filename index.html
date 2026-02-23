@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name - Portfolio</title>
+    <title>adrian zhang — composer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -51,15 +53,22 @@
             margin: 0 auto;
         }
 
+        /* ── HERO ── */
         .hero {
             text-align: center;
-            padding: 6rem 2rem;
+            padding: 6rem 2rem 4rem;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
+            position: relative;   /* ← needed for canvas */
+            overflow: hidden;     /* ← needed for canvas */
+            max-width: 100%;      /* hero should be full width */
         }
 
-        .hero h1 {
-            font-size: 3rem;
+        /* ── PARTICLE CANVAS ── */
+        #name-canvas {
+            display: block;
+            width: 100%;
+            height: 180px;
             margin-bottom: 1rem;
         }
 
@@ -149,6 +158,13 @@
             justify-content: center;
             color: #666;
             margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .video-placeholder iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
         }
 
         .blog-posts {
@@ -301,8 +317,8 @@
         }
 
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
+            #name-canvas {
+                height: 120px;
             }
 
             .hero p {
@@ -319,55 +335,36 @@
             }
         }
     </style>
-    
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Adrian Zhang</title>
-
 </head>
 <body>
     <nav>
         <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#psychology">Psychology</a></li>
-            <li><a href="#music">Music</a></li>
-            <li><a href="#volleyball">Volleyball</a></li>
-            <li><a href="#blog">Blog</a></li>
-            <li><a href="#resume">Resume</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#home">top</a></li>
+            <li><a href="#about">bio</a></li>
+            <li><a href="#psychology">psych</a></li>
+            <li><a href="#music">music</a></li>
+            <li><a href="#volleyball">volleyball</a></li>
+            <li><a href="#blog">blog</a></li>
+            <li><a href="#resume">cv</a></li>
+            <li><a href="#contact">|contact me!|</a></li>
         </ul>
     </nav>
 
     <section class="hero" id="home">
-    <h1> hello, i am
-        <span class="name">
-            <span>a</span>
-            <span>d</span>
-            <span>r</span>
-            <span>i</span>
-            <span>a</span>
-            <span>n</span>
-            <span>&nbsp;</span>
-            <span>z</span>
-            <span>h</span>
-            <span>a</span>
-            <span>n</span>
-            <span>g</span>
-        </span>
-    </h1>
+        <!-- Particle canvas — your name appears here -->
+        <canvas id="name-canvas"></canvas>
 
-    <p>High School Student | Music Composer | Volleyball Player | Future Psychologist</p>
-    <a href="#contact" class="cta-button">Get In Touch</a>
-</section>
+        <p>| composer |</p>
+        <!--<a href="#contact" class="cta-button">get in touch</a>-->
+    </section>
 
     <section id="about">
-        <h2>About Me</h2>
+        <h2>biography</h2>
         <div class="about-content">
-            <p>Hi! I'm a high school student with a deep passion for understanding the human mind and expressing emotions through music. I'm fascinated by psychology and plan to pursue it in college, while continuing to develop my skills as a classical music composer.</p>
-            <p style="margin-top: 1rem;">When I'm not studying or composing, you'll find me on the volleyball court playing for my club travel team. I love the teamwork, discipline, and competitive spirit that volleyball brings to my life. Balancing academics, music, and athletics has taught me time management, dedication, and the importance of pursuing what you're passionate about.</p>
-            <p style="margin-top: 1rem;">Explore the sections below to learn more about my psychology writings, musical compositions, volleyball journey, and more!</p>
+            <p></p>
+            <p style="margin-top: 1rem;">Currently a 11th grade student at Jericho High School in New York, Adrian Zhang has already earned considerable recognition as a composer.</p>
+            <p style="margin-top: 1rem;">Adrian was accepted into the BUTI Young Artists Program this year. He was a second-place winner for the 2025 NFMC Class 3 Composing Competition, a finalist in the 2023 National Young Composers Challenge, and an Emerging Composers prize winner for the 2023 Tribeca New Music Young Composers Competition. Adrian was the MTNA 2023 Winner of the Junior Category Eastern Division. His piano quartet “War” premiered at the “In Bloom” concert in New York City in 2023.</p>
+            <p style="margin-top: 1rem;">Adrian began his composing journey improvising on the piano; now, he learns composition from Dr. Lu Wang. Adrian aims to compose music that explores both classical and modern styles, creating ambient landscapes in which contrasting elements guide the listener through shifting perspectives.</p>
         </div>
     </section>
 
@@ -415,7 +412,8 @@
             </div>
         </div>
     </section>
-<section id="music">
+
+    <section id="music">
         <h2>My Compositions</h2>
         <div class="about-content">
             <p style="margin-bottom: 2rem;">Here are some of my classical music compositions. Click on the titles to listen on YouTube.</p>
@@ -424,8 +422,8 @@
             <div class="video-item">
                 <div class="video-placeholder">
                     <iframe src="https://www.youtube.com/embed/2KL3K2Gt8Uw"
-                    referrerpolicy="strict-origin-when-cross-origin" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen></iframe>
                 </div>
                 <h3>Progression (2023)</h3>
@@ -434,23 +432,22 @@
             <div class="video-item">
                 <div class="video-placeholder">
                     <iframe src="https://www.youtube.com/embed/E0RYIPe7dR8"
-                    referrerpolicy="strict-origin-when-cross-origin" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen></iframe>
                 </div>
                 <h3>Quest</h3>
                 <p>A piano piece exploring themes of introspection and emotional depth.</p>
-           </div>
+            </div>
             <div class="video-item">
                 <div class="video-placeholder">
                     <iframe src="https://www.youtube.com/embed/725zUKolD34"
-                    referrerpolicy="strict-origin-when-cross-origin" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen></iframe>
                 </div>
                 <h3>Piano Quartet</h3>
                 <p>The first movement of a work-in-progress sonata, featuring dynamic contrasts and emotional depth.</p>
-        
             </div>
         </div>
     </section>
@@ -580,18 +577,19 @@
     </section>
 
     <footer>
-        <p>&copy; 2026 Adrian Zhang. All rights reserved.</p>
+        <p>&copy; 2026 adrian zhang. all rights reserved.</p>
         <div class="social-links">
-            <a href="#">Instagram</a>
-            <a href="#">YouTube</a>
-            <a href="#">Email</a>
+            <a href="#">instagram</a>
+            <a href="#">youTube</a>
+            <a href="#">email</a>
         </div>
     </footer>
 
+    <!-- ── EXISTING SCRIPTS ── -->
     <script>
         function handleSubmit(e) {
             e.preventDefault();
-            alert('Thank you for your message! In a real website, this would send an email or save to a database.');
+            alert('thank you for your message!');
             e.target.reset();
         }
 
@@ -605,5 +603,108 @@
             });
         });
     </script>
+
+    <!-- ── PARTICLE NAME ANIMATION ── -->
+    <script>
+        const canvas = document.getElementById("name-canvas");
+        const ctx    = canvas.getContext("2d");
+
+        const TEXT         = "adrian zhang";   // ← your name
+        const COLORS       = ["#ffffff","#e0d7ff","#c4b5fd","#a78bfa","#ddd6fe"];
+        const PARTICLE_GAP = 4;
+
+        function setup() {
+            canvas.width  = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+        }
+
+        function samplePixels() {
+            const W = canvas.width, H = canvas.height;
+            const off  = document.createElement("canvas");
+            off.width  = W; off.height = H;
+            const octx = off.getContext("2d");
+            const fontSize = Math.min(W * 0.11, 100);
+            octx.font         = `600 ${fontSize}px 'Cormorant Garamond', serif`;
+            octx.textAlign    = "center";
+            octx.textBaseline = "middle";
+            octx.fillStyle    = "white";
+            octx.fillText(TEXT, W / 2, H / 2);
+            const data   = octx.getImageData(0, 0, W, H).data;
+            const points = [];
+            for (let y = 0; y < H; y += PARTICLE_GAP)
+                for (let x = 0; x < W; x += PARTICLE_GAP)
+                    if (data[(y * W + x) * 4 + 3] > 128)
+                        points.push({ x, y });
+            // shuffle so particles fly in from all directions
+            for (let i = points.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [points[i], points[j]] = [points[j], points[i]];
+            }
+            return points;
+        }
+
+        class Particle {
+            constructor(target) {
+                this.tx = target.x; this.ty = target.y;
+                const angle = Math.random() * Math.PI * 2;
+                const r     = Math.max(canvas.width, canvas.height) * 1.5;
+                this.x  = canvas.width  / 2 + Math.cos(angle) * r;
+                this.y  = canvas.height / 2 + Math.sin(angle) * r;
+                this.vx = this.vy = 0;
+                this.size  = Math.random() * 2 + 0.5;
+                this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
+                this.delay   = Math.random() * 1.2;
+                this.elapsed = 0;
+                this.alpha   = 0;
+                this.done    = false;
+            }
+            update(dt) {
+                this.elapsed += dt;
+                if (this.elapsed < this.delay) return;
+                this.alpha = Math.min(1, this.alpha + dt * 2);
+                const dx = this.tx - this.x, dy = this.ty - this.y;
+                this.vx  = (this.vx + dx * 0.06) * 0.82;
+                this.vy  = (this.vy + dy * 0.06) * 0.82;
+                this.x  += this.vx; this.y += this.vy;
+                if (Math.abs(dx) < 0.5 && Math.abs(dy) < 0.5 &&
+                    Math.abs(this.vx) < 0.3 && Math.abs(this.vy) < 0.3) {
+                    this.x = this.tx; this.y = this.ty; this.done = true;
+                }
+            }
+            draw() {
+                ctx.globalAlpha = this.alpha;
+                ctx.fillStyle   = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        let particles = [], lastTime = null, animId = null;
+
+        function init() {
+            setup();
+            particles = samplePixels().map(p => new Particle(p));
+            lastTime  = null;
+            if (animId) cancelAnimationFrame(animId);
+            loop();
+        }
+
+        function loop(ts) {
+            animId = requestAnimationFrame(loop);
+            const dt = lastTime ? Math.min((ts - lastTime) / 1000, 0.05) : 0.016;
+            lastTime = ts;
+            // trail effect — matches hero gradient color
+            ctx.fillStyle = "rgba(102, 126, 234, 0.2)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.globalAlpha = 1;
+            for (const p of particles) { p.update(dt); p.draw(); }
+            ctx.globalAlpha = 1;
+        }
+
+        document.fonts.ready.then(init);
+        window.addEventListener("resize", init);
+    </script>
+
 </body>
 </html>
