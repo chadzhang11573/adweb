@@ -14,7 +14,7 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: monospace;
             line-height: 1.6;
             color: #ffffff;
             background-color: #000000;
@@ -611,7 +611,7 @@
         const ctx    = canvas.getContext("2d");
 
         const TEXT         = "adrian zhang";   // ← your name
-        const COLORS       = ["#ffffff","#e0d7ff","#c4b5fd","#a78bfa","#ddd6fe"];
+        const COLORS = ["#00f5ff", "#ffe600", "#ff2d78"];
         const PARTICLE_GAP = 2;
 
         function setup() {
@@ -673,11 +673,16 @@
                 }
             }
             draw() {
-                ctx.globalAlpha = this.alpha;
-                ctx.fillStyle   = this.color;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
+    ctx.globalAlpha = this.alpha;
+    // blend toward white as particle settles (done = fully white)
+    const dx = this.tx - this.x, dy = this.ty - this.y;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    const settledness = Math.max(0, 1 - dist / 80);
+    ctx.fillStyle = settledness > 0.95 ? "#ffffff" : this.color;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fill();
+}
             }
         }
 
