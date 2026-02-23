@@ -23,7 +23,7 @@
         nav {
             background: #000000;
             padding: 1rem 2rem;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(255,255,255,0.05);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -37,16 +37,32 @@
             flex-wrap: wrap;
         }
 
+        /* base nav — no color set here so individual classes win */
         nav a {
             text-decoration: none;
-            color: #333;
             font-weight: 500;
-            transition: color 0.3s;
+            transition: opacity 0.3s;
         }
 
-        nav a:hover {
-            color: #0066cc;
-        }
+        nav a:hover { opacity: 1; }  /* cancel the old dimming effect */
+        .nav-home:hover       { color: #ffffff; }
+        .nav-about:hover      { color: #ff00ff; }
+        .nav-psych:hover      { color: #ffe600; }
+        .nav-music:hover      { color: #00f5ff; }
+        .nav-volleyball:hover { color: #ff00ff; }
+        .nav-blog:hover       { color: #ffe600; }
+        .nav-resume:hover     { color: #00f5ff; }
+        .nav-contact:hover    { color: #ff00ff; }
+
+        /* ── individual nav link colors ── */
+        .nav-home       { color: #ffffff; }
+        .nav-about      { color: #ffffff; }
+        .nav-psych      { color: #ffffff; }
+        .nav-music      { color: #ffffff; }
+        .nav-volleyball { color: #ffffff; }
+        .nav-blog       { color: #ffffff; }
+        .nav-resume     { color: #ffffff; }
+        .nav-contact    { color: #ffffff; font-weight: 700; }
 
         section {
             padding: 4rem 2rem;
@@ -54,18 +70,18 @@
             margin: 0 auto;
         }
 
-        /* ── HERO ── */
+        /* ── hero ── */
         .hero {
             text-align: center;
             padding: 6rem 2rem 4rem;
             background: #000000;
             color: white;
-            position: relative;   /* ← needed for canvas */
-            overflow: hidden;     /* ← needed for canvas */
-            max-width: 100%;      /* hero should be full width */
+            position: relative;
+            overflow: hidden;
+            max-width: 100%;
         }
 
-        /* ── PARTICLE CANVAS ── */
+        /* ── particle canvas ── */
         #name-canvas {
             display: block;
             width: 100%;
@@ -83,7 +99,7 @@
             display: inline-block;
             padding: 0.8rem 2rem;
             background: white;
-            color: #667eea;
+            color: #000000;
             text-decoration: none;
             border-radius: 5px;
             font-weight: 600;
@@ -114,7 +130,7 @@
         }
 
         .work-item {
-            background: #f8f9fa;
+            background: #111111;
             padding: 2rem;
             border-radius: 10px;
             transition: transform 0.3s, box-shadow 0.3s;
@@ -122,13 +138,18 @@
 
         .work-item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 20px rgba(255,255,255,0.05);
         }
 
         .work-item h3 {
             margin-bottom: 1rem;
-            color: #667eea;
+            color: #00f5ff;
             font-size: 1.3rem;
+        }
+
+        .work-item a {
+            color: #ffe600;
+            text-decoration: none;
         }
 
         .video-grid {
@@ -139,20 +160,20 @@
         }
 
         .video-item {
-            background: #f8f9fa;
+            background: #111111;
             padding: 1.5rem;
             border-radius: 10px;
         }
 
         .video-item h3 {
             margin-bottom: 1rem;
-            color: #667eea;
+            color: #ffe600;
         }
 
         .video-placeholder {
             width: 100%;
             height: 200px;
-            background: #ddd;
+            background: #222;
             border-radius: 5px;
             display: flex;
             align-items: center;
@@ -175,7 +196,7 @@
         }
 
         .blog-post {
-            background: #f8f9fa;
+            background: #111111;
             padding: 2rem;
             border-radius: 10px;
             transition: transform 0.3s, box-shadow 0.3s;
@@ -183,16 +204,16 @@
 
         .blog-post:hover {
             transform: translateY(-3px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 20px rgba(255,255,255,0.05);
         }
 
         .blog-post h3 {
-            color: #667eea;
+            color: #ff2d78;
             margin-bottom: 0.5rem;
         }
 
         .blog-date {
-            color: #666;
+            color: #888;
             font-size: 0.9rem;
             margin-bottom: 1rem;
         }
@@ -207,9 +228,9 @@
         }
 
         .resume-category h3 {
-            color: #667eea;
+            color: #00f5ff;
             margin-bottom: 1rem;
-            border-bottom: 2px solid #667eea;
+            border-bottom: 2px solid #00f5ff;
             padding-bottom: 0.5rem;
         }
 
@@ -222,7 +243,7 @@
         }
 
         .resume-item .date {
-            color: #666;
+            color: #888;
             font-size: 0.9rem;
             margin-bottom: 0.5rem;
         }
@@ -230,17 +251,17 @@
         .download-btn {
             display: inline-block;
             padding: 0.8rem 2rem;
-            background: #667eea;
-            color: white;
+            background: #00f5ff;
+            color: #000000;
             text-decoration: none;
             border-radius: 5px;
             font-weight: 600;
             margin-top: 1rem;
-            transition: background 0.3s;
+            transition: opacity 0.3s;
         }
 
         .download-btn:hover {
-            background: #5568d3;
+            opacity: 0.8;
         }
 
         .contact-form {
@@ -261,15 +282,17 @@
         input, textarea {
             width: 100%;
             padding: 0.8rem;
-            border: 2px solid #e0e0e0;
+            border: 2px solid #333;
             border-radius: 5px;
             font-family: inherit;
             font-size: 1rem;
+            background: #111;
+            color: #ffffff;
         }
 
         input:focus, textarea:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #00f5ff;
         }
 
         textarea {
@@ -278,7 +301,7 @@
         }
 
         button {
-            background: #667eea;
+            background: #ff2d78;
             color: white;
             padding: 1rem 2rem;
             border: none;
@@ -286,15 +309,16 @@
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: background 0.3s;
+            font-family: monospace;
+            transition: opacity 0.3s;
         }
 
         button:hover {
-            background: #5568d3;
+            opacity: 0.8;
         }
 
         footer {
-            background: #333;
+            background: #111111;
             color: white;
             text-align: center;
             padding: 2rem;
@@ -308,13 +332,13 @@
         }
 
         .social-links a {
-            color: white;
+            color: #ffe600;
             text-decoration: none;
             transition: opacity 0.3s;
         }
 
         .social-links a:hover {
-            opacity: 0.7;
+            opacity: 0.6;
         }
 
         @media (max-width: 768px) {
@@ -340,84 +364,80 @@
 <body>
     <nav>
         <ul>
-            <li><a href="#home">top</a></li>
-            <li><a href="#about">bio</a></li>
-            <li><a href="#psychology">psych</a></li>
-            <li><a href="#music">music</a></li>
-            <li><a href="#volleyball">volleyball</a></li>
-            <li><a href="#blog">blog</a></li>
-            <li><a href="#resume">cv</a></li>
-            <li><a href="#contact">|contact me!|</a></li>
+            <li><a href="#home"       class="nav-home">home</a></li>
+            <li><a href="#about"      class="nav-about">about</a></li>
+            <li><a href="#psychology" class="nav-psych">psychology</a></li>
+            <li><a href="#music"      class="nav-music">music</a></li>
+            <li><a href="#volleyball" class="nav-volleyball">volleyball</a></li>
+            <li><a href="#blog"       class="nav-blog">blog</a></li>
+            <li><a href="#resume"     class="nav-resume">resume</a></li>
+            <li><a href="#contact"    class="nav-contact">| contact me! |</a></li>
         </ul>
     </nav>
 
     <section class="hero" id="home">
-        <!-- Particle canvas — your name appears here -->
         <canvas id="name-canvas"></canvas>
-
         <p>| composer |</p>
-        <!--<a href="#contact" class="cta-button">get in touch</a>-->
     </section>
 
     <section id="about">
         <h2>biography</h2>
         <div class="about-content">
-            <p></p>
-            <p style="margin-top: 1rem;">Currently a 11th grade student at Jericho High School in New York, Adrian Zhang has already earned considerable recognition as a composer.</p>
-            <p style="margin-top: 1rem;">Adrian was accepted into the BUTI Young Artists Program this year. He was a second-place winner for the 2025 NFMC Class 3 Composing Competition, a finalist in the 2023 National Young Composers Challenge, and an Emerging Composers prize winner for the 2023 Tribeca New Music Young Composers Competition. Adrian was the MTNA 2023 Winner of the Junior Category Eastern Division. His piano quartet “War” premiered at the “In Bloom” concert in New York City in 2023.</p>
-            <p style="margin-top: 1rem;">Adrian began his composing journey improvising on the piano; now, he learns composition from Dr. Lu Wang. Adrian aims to compose music that explores both classical and modern styles, creating ambient landscapes in which contrasting elements guide the listener through shifting perspectives.</p>
+            <p>currently a 11th grade student at jericho high school in new york, adrian zhang has already earned considerable recognition as a composer.</p>
+            <p style="margin-top: 1rem;">adrian was accepted into the buti young artists program this year. he was a second-place winner for the 2025 nfmc class 3 composing competition, a finalist in the 2023 national young composers challenge, and an emerging composers prize winner for the 2023 tribeca new music young composers competition. adrian was the mtna 2023 winner of the junior category eastern division. his piano quartet "war" premiered at the "in bloom" concert in new york city in 2023.</p>
+            <p style="margin-top: 1rem;">adrian began his composing journey improvising on the piano; now, he learns composition from dr. lu wang. adrian aims to compose music that explores both classical and modern styles, creating ambient landscapes in which contrasting elements guide the listener through shifting perspectives.</p>
         </div>
     </section>
 
     <section id="work">
-        <h2>Quick Overview</h2>
+        <h2>quick overview</h2>
         <div class="work-grid">
             <div class="work-item">
-                <h3>🎵 Music Composition</h3>
-                <p>I compose classical music pieces, drawing inspiration from composers like Chopin, Debussy, and Rachmaninoff. My compositions explore themes of emotion, nature, and the human experience.</p>
-                <a href="#music" style="color: #667eea; text-decoration: none;">→ View my compositions</a>
+                <h3>🎵 music composition</h3>
+                <p>i compose classical music pieces, drawing inspiration from composers like chopin, debussy, and rachmaninoff. my compositions explore themes of emotion, nature, and the human experience.</p>
+                <a href="#music">→ view my compositions</a>
             </div>
             <div class="work-item">
-                <h3>🧠 Psychology Research</h3>
-                <p>I'm deeply interested in cognitive psychology and mental health. I read research papers, follow current studies, and write about psychology topics that fascinate me.</p>
-                <a href="#psychology" style="color: #667eea; text-decoration: none;">→ Read my writings</a>
+                <h3>🧠 psychology research</h3>
+                <p>i'm deeply interested in cognitive psychology and mental health. i read research papers, follow current studies, and write about psychology topics that fascinate me.</p>
+                <a href="#psychology">→ read my writings</a>
             </div>
             <div class="work-item">
-                <h3>🏐 Club Volleyball</h3>
-                <p>As a member of my club travel volleyball team, I compete in tournaments across the region. Volleyball has taught me teamwork, resilience, and the value of consistent practice.</p>
-                <a href="#volleyball" style="color: #667eea; text-decoration: none;">→ See my journey</a>
+                <h3>🏐 club volleyball</h3>
+                <p>as a member of my club travel volleyball team, i compete in tournaments across the region. volleyball has taught me teamwork, resilience, and the value of consistent practice.</p>
+                <a href="#volleyball">→ see my journey</a>
             </div>
         </div>
     </section>
 
     <section id="psychology">
-        <h2>Psychology Reading & Writing</h2>
+        <h2>psychology reading & writing</h2>
         <div class="about-content">
-            <p style="margin-bottom: 2rem;">I'm passionate about exploring the human mind and behavior. Here are some of my recent readings and writings on psychology topics.</p>
+            <p style="margin-bottom: 2rem;">i'm passionate about exploring the human mind and behavior. here are some of my recent readings and writings on psychology topics.</p>
         </div>
         <div class="blog-posts">
             <div class="blog-post">
-                <h3>Understanding Cognitive Biases in Daily Life</h3>
-                <div class="blog-date">December 2025</div>
-                <p>An exploration of how confirmation bias and availability heuristic affect our decision-making processes. I examine real-world examples and discuss strategies to overcome these mental shortcuts.</p>
+                <h3>understanding cognitive biases in daily life</h3>
+                <div class="blog-date">december 2025</div>
+                <p>an exploration of how confirmation bias and availability heuristic affect our decision-making processes. i examine real-world examples and discuss strategies to overcome these mental shortcuts.</p>
             </div>
             <div class="blog-post">
-                <h3>The Psychology of Music and Emotion</h3>
-                <div class="blog-date">November 2025</div>
-                <p>A deep dive into how music affects our emotional states, exploring research on music therapy and the neurological responses to different musical elements.</p>
+                <h3>the psychology of music and emotion</h3>
+                <div class="blog-date">november 2025</div>
+                <p>a deep dive into how music affects our emotional states, exploring research on music therapy and the neurological responses to different musical elements.</p>
             </div>
             <div class="blog-post">
-                <h3>Book Review: "Thinking, Fast and Slow" by Daniel Kahneman</h3>
-                <div class="blog-date">October 2025</div>
-                <p>My thoughts on Kahneman's groundbreaking work on behavioral economics and the two systems of thinking. Key takeaways and how they apply to student life.</p>
+                <h3>book review: "thinking, fast and slow" by daniel kahneman</h3>
+                <div class="blog-date">october 2025</div>
+                <p>my thoughts on kahneman's groundbreaking work on behavioral economics and the two systems of thinking. key takeaways and how they apply to student life.</p>
             </div>
         </div>
     </section>
 
     <section id="music">
-        <h2>My Compositions</h2>
+        <h2>my compositions</h2>
         <div class="about-content">
-            <p style="margin-bottom: 2rem;">Here are some of my classical music compositions. Click on the titles to listen on YouTube.</p>
+            <p style="margin-bottom: 2rem;">here are some of my classical music compositions. click on the titles to listen on youtube.</p>
         </div>
         <div class="video-grid">
             <div class="video-item">
@@ -427,8 +447,8 @@
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen></iframe>
                 </div>
-                <h3>Progression (2023)</h3>
-                <p>An original composition by Adrian Zhang exploring musical development and emotional journey through classical piano.</p>
+                <h3>progression (2023)</h3>
+                <p>an original composition exploring musical development and emotional journey through classical piano.</p>
             </div>
             <div class="video-item">
                 <div class="video-placeholder">
@@ -437,8 +457,8 @@
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen></iframe>
                 </div>
-                <h3>Quest</h3>
-                <p>A piano piece exploring themes of introspection and emotional depth.</p>
+                <h3>quest</h3>
+                <p>a piano piece exploring themes of introspection and emotional depth.</p>
             </div>
             <div class="video-item">
                 <div class="video-placeholder">
@@ -447,133 +467,128 @@
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen></iframe>
                 </div>
-                <h3>Piano Quartet</h3>
-                <p>The first movement of a work-in-progress sonata, featuring dynamic contrasts and emotional depth.</p>
+                <h3>piano quartet</h3>
+                <p>featuring dynamic contrasts and emotional depth.</p>
             </div>
         </div>
     </section>
 
     <section id="volleyball">
-        <h2>Volleyball Journey</h2>
+        <h2>volleyball journey</h2>
         <div class="about-content">
-            <p style="margin-bottom: 2rem;">Follow my volleyball experiences, tournament highlights, and reflections on being a club travel volleyball player.</p>
+            <p style="margin-bottom: 2rem;">follow my volleyball experiences, tournament highlights, and reflections on being a club travel volleyball player.</p>
         </div>
         <div class="blog-posts">
             <div class="blog-post">
-                <h3>Regional Championship Reflections</h3>
-                <div class="blog-date">January 2026</div>
-                <p>Our team's journey through the regional championships. What we learned, how we grew, and the bonds we formed along the way.</p>
-                <a href="YOUR_VIDEO_LINK" target="_blank" style="color: #667eea; text-decoration: none;">🎥 Watch Game Highlights</a>
+                <h3>regional championship reflections</h3>
+                <div class="blog-date">january 2026</div>
+                <p>our team's journey through the regional championships. what we learned, how we grew, and the bonds we formed along the way.</p>
+                <a href="YOUR_VIDEO_LINK" target="_blank" style="color: #ffe600;">🎥 watch game highlights</a>
             </div>
             <div class="blog-post">
-                <h3>The Mental Game: Staying Focused Under Pressure</h3>
-                <div class="blog-date">December 2025</div>
-                <p>How I use psychology principles to stay mentally strong during intense matches. Techniques for managing stress and maintaining confidence.</p>
-                <a href="YOUR_VIDEO_LINK" target="_blank" style="color: #667eea; text-decoration: none;">🎥 Watch Training Session</a>
+                <h3>the mental game: staying focused under pressure</h3>
+                <div class="blog-date">december 2025</div>
+                <p>how i use psychology principles to stay mentally strong during intense matches. techniques for managing stress and maintaining confidence.</p>
+                <a href="YOUR_VIDEO_LINK" target="_blank" style="color: #ffe600;">🎥 watch training session</a>
             </div>
             <div class="blog-post">
-                <h3>Tournament Recap: Winter Invitational</h3>
-                <div class="blog-date">November 2025</div>
-                <p>A detailed recap of our performance at the Winter Invitational. Key plays, team dynamics, and lessons learned.</p>
-                <a href="YOUR_VIDEO_LINK" target="_blank" style="color: #667eea; text-decoration: none;">🎥 Watch Full Match</a>
+                <h3>tournament recap: winter invitational</h3>
+                <div class="blog-date">november 2025</div>
+                <p>a detailed recap of our performance at the winter invitational. key plays, team dynamics, and lessons learned.</p>
+                <a href="YOUR_VIDEO_LINK" target="_blank" style="color: #ffe600;">🎥 watch full match</a>
             </div>
         </div>
     </section>
 
     <section id="blog">
-        <h2>Blog</h2>
+        <h2>blog</h2>
         <div class="about-content">
-            <p style="margin-bottom: 2rem;">My thoughts on life, learning, and the intersection of psychology, music, and sports.</p>
+            <p style="margin-bottom: 2rem;">my thoughts on life, learning, and the intersection of psychology, music, and sports.</p>
         </div>
         <div class="blog-posts">
             <div class="blog-post">
-                <h3>Balancing Passion and Academics</h3>
-                <div class="blog-date">January 2026</div>
-                <p>How I manage my time between composing music, playing volleyball, and maintaining strong grades. Tips and strategies that have worked for me.</p>
+                <h3>balancing passion and academics</h3>
+                <div class="blog-date">january 2026</div>
+                <p>how i manage my time between composing music, playing volleyball, and maintaining strong grades. tips and strategies that have worked for me.</p>
             </div>
             <div class="blog-post">
-                <h3>Why I Want to Study Psychology</h3>
-                <div class="blog-date">December 2025</div>
-                <p>The personal experiences and curiosities that have drawn me to psychology. My goals for college and beyond.</p>
+                <h3>why i want to study psychology</h3>
+                <div class="blog-date">december 2025</div>
+                <p>the personal experiences and curiosities that have drawn me to psychology. my goals for college and beyond.</p>
             </div>
             <div class="blog-post">
-                <h3>The Discipline of Daily Practice</h3>
-                <div class="blog-date">November 2025</div>
-                <p>What volleyball and music composition have taught me about consistency, patience, and the power of showing up every day.</p>
+                <h3>the discipline of daily practice</h3>
+                <div class="blog-date">november 2025</div>
+                <p>what volleyball and music composition have taught me about consistency, patience, and the power of showing up every day.</p>
             </div>
         </div>
     </section>
 
     <section id="resume">
-        <h2>Resume</h2>
+        <h2>resume</h2>
         <div class="resume-section">
             <div class="resume-category">
-                <h3>Education</h3>
+                <h3>education</h3>
                 <div class="resume-item">
-                    <h4>[Your High School Name]</h4>
-                    <div class="date">Expected Graduation: 2027</div>
-                    <p>GPA: [Your GPA] | Relevant Coursework: AP Psychology, Music Theory, [Other Courses]</p>
+                    <h4>jericho high school</h4>
+                    <div class="date">expected graduation: 2027</div>
+                    <p>relevant coursework: ap psychology, music theory</p>
                 </div>
             </div>
-
             <div class="resume-category">
-                <h3>Music Experience</h3>
+                <h3>music experience</h3>
                 <div class="resume-item">
-                    <h4>Classical Music Composer</h4>
-                    <div class="date">2022 - Present</div>
-                    <p>Composed over [X] original classical pieces including nocturnes, preludes, and sonatas. Performances at school concerts and local events.</p>
+                    <h4>classical music composer</h4>
+                    <div class="date">2022 — present</div>
+                    <p>composed original classical pieces. performances at school concerts and local events.</p>
                 </div>
                 <div class="resume-item">
-                    <h4>[Your Instrument] Player</h4>
-                    <div class="date">20XX - Present</div>
-                    <p>Member of school orchestra/band. [Any awards or achievements]</p>
+                    <h4>piano</h4>
+                    <div class="date">2016 — present</div>
+                    <p>member of school orchestra. mtna 2023 winner, junior category eastern division.</p>
                 </div>
             </div>
-
             <div class="resume-category">
-                <h3>Athletics</h3>
+                <h3>athletics</h3>
                 <div class="resume-item">
-                    <h4>Club Travel Volleyball Player</h4>
-                    <div class="date">20XX - Present</div>
-                    <p>[Your Club Name] | Position: [Your Position] | Competed in regional and state tournaments</p>
+                    <h4>club travel volleyball player</h4>
+                    <div class="date">2022 — present</div>
+                    <p>competed in regional and state tournaments.</p>
                 </div>
             </div>
-
             <div class="resume-category">
-                <h3>Psychology & Research Interests</h3>
+                <h3>psychology & research interests</h3>
                 <div class="resume-item">
-                    <p>Independent study of cognitive psychology, behavioral economics, and music psychology. Active reader of psychology research and literature.</p>
+                    <p>independent study of cognitive psychology, behavioral economics, and music psychology. active reader of psychology research and literature.</p>
                 </div>
             </div>
-
             <div class="resume-category">
-                <h3>Skills</h3>
+                <h3>skills</h3>
                 <div class="resume-item">
-                    <p><strong>Music:</strong> Composition, Music Theory, [Your Instruments], Notation Software (Finale/Sibelius/MuseScore)</p>
-                    <p><strong>Other:</strong> Research & Writing, Time Management, Team Collaboration, Public Speaking</p>
+                    <p><strong>music:</strong> composition, music theory, piano, notation software (finale / sibelius / musescore)</p>
+                    <p><strong>other:</strong> research & writing, time management, team collaboration, public speaking</p>
                 </div>
             </div>
-
-            <a href="#" class="download-btn">📄 Download Full Resume (PDF)</a>
+            <a href="#" class="download-btn">📄 download full resume (pdf)</a>
         </div>
     </section>
 
     <section id="contact">
-        <h2>Let's Connect</h2>
+        <h2>let's connect</h2>
         <form class="contact-form" onsubmit="handleSubmit(event)">
             <div class="form-group">
-                <label for="name">Name</label>
+                <label for="name">name</label>
                 <input type="text" id="name" name="name" required>
             </div>
             <div class="form-group">
-                <label for="email">Email</label>
+                <label for="email">email</label>
                 <input type="email" id="email" name="email" required>
             </div>
             <div class="form-group">
-                <label for="message">Message</label>
+                <label for="message">message</label>
                 <textarea id="message" name="message" required></textarea>
             </div>
-            <button type="submit">Send Message</button>
+            <button type="submit">send message</button>
         </form>
     </section>
 
@@ -581,12 +596,12 @@
         <p>&copy; 2026 adrian zhang. all rights reserved.</p>
         <div class="social-links">
             <a href="#">instagram</a>
-            <a href="#">youTube</a>
+            <a href="#">youtube</a>
             <a href="#">email</a>
         </div>
     </footer>
 
-    <!-- ── EXISTING SCRIPTS ── -->
+    <!-- ── scripts ── -->
     <script>
         function handleSubmit(e) {
             e.preventDefault();
@@ -605,13 +620,13 @@
         });
     </script>
 
-    <!-- ── PARTICLE NAME ANIMATION ── -->
+    <!-- ── particle name animation ── -->
     <script>
         const canvas = document.getElementById("name-canvas");
         const ctx    = canvas.getContext("2d");
 
-        const TEXT         = "adrian zhang";   // ← your name
-        const COLORS = ["#00f5ff", "#ffe600", "#ff2d78"];
+        const TEXT         = "adrian zhang";
+        const COLORS       = ["#00f5ff", "#ffe600", "#ff2d78"];
         const PARTICLE_GAP = 2;
 
         function setup() {
@@ -636,7 +651,6 @@
                 for (let x = 0; x < W; x += PARTICLE_GAP)
                     if (data[(y * W + x) * 4 + 3] > 128)
                         points.push({ x, y });
-            // shuffle so particles fly in from all directions
             for (let i = points.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [points[i], points[j]] = [points[j], points[i]];
@@ -659,6 +673,7 @@
                 this.alpha   = 0;
                 this.done    = false;
             }
+
             update(dt) {
                 this.elapsed += dt;
                 if (this.elapsed < this.delay) return;
@@ -672,9 +687,9 @@
                     this.x = this.tx; this.y = this.ty; this.done = true;
                 }
             }
+
             draw() {
                 ctx.globalAlpha = this.alpha;
-                // blend toward white as particle settles (done = fully white)
                 const dx = this.tx - this.x, dy = this.ty - this.y;
                 const dist = Math.sqrt(dx * dx + dy * dy);
                 const settledness = Math.max(0, 1 - dist / 80);
@@ -682,7 +697,6 @@
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
-                }
             }
         }
 
@@ -700,7 +714,6 @@
             animId = requestAnimationFrame(loop);
             const dt = lastTime ? Math.min((ts - lastTime) / 1000, 0.05) : 0.016;
             lastTime = ts;
-            // trail effect — matches hero gradient color
             ctx.fillStyle = "rgba(0, 0, 0, 0.2)";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             ctx.globalAlpha = 1;
