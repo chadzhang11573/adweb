@@ -261,6 +261,43 @@
             margin: 0 auto;
             font-size: 1.1rem;
         }
+        
+        /* ── carousel layout fix ── */
+        .carousel-container {
+            display: flex;
+            flex-direction: row;        /* force horizontal */
+            flex-wrap: nowrap;          /* prevent wrapping */
+            width: 100%;
+        }
+        
+        .carousel-slide {
+            min-width: 100%;            /* each slide fills exactly one viewport width */
+            box-sizing: border-box;
+            padding: 0 1rem;
+        }
+        
+        /* ── carousel track info styling ── */
+        .track-title {
+            font-family: monospace;
+            font-size: 0.9rem;
+            color: #ff00ff;
+            margin-bottom: 0.3rem;
+            opacity: 0.9;
+        }
+        
+        .track-instrumentation {
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: #ff00ff;
+            opacity: 0.6;
+            margin-bottom: 1rem;
+        }
+        
+        .player-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
 
         .blog-posts {
             display: grid;
@@ -676,7 +713,7 @@ Images of an arctic scene slowly, then explosively progress into crashing iceber
             <div class="carousel-slide">
                 <div class="player-item">
                     <div class="album-art">
-                        <img src=war photo.png" alt="War (2023)" style="width: 25%; aspect-ratio: 1 / 1; object-fit: cover;">
+                        <img src="war photo.png" alt="War (2023)" style="width: 25%; aspect-ratio: 1 / 1; object-fit: cover;">
                     </div>
                     <div class="player-info">
                         <div class="track-title">War (2023)</div>
